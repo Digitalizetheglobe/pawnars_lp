@@ -1192,7 +1192,15 @@ const specifications1 = [
             </div>
             
             <div className="border-t border-gray-800 pt-8 mt-8 text-center text-gray-400">
-          <p>&copy; 2025 Pawna Lake Villas. All rights reserved. | RERA Registration Applied</p>
+          <p>&copy; 2025 Pawna Lake Villas. All rights reserved.  | Crafted with care by 
+                    <a 
+                        href="https://digitalizetheglobe.com/" 
+                        className="text-[#d84a48] hover:text-white transition ml-1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Digitalize The Globe
+                    </a>.</p>
           <div className="mt-4 flex justify-center space-x-6">
             <span className="text-sm">🏆 Premium Real Estate</span>
             <span className="text-sm">🌟 Luxury Living</span>
