@@ -12,6 +12,8 @@ import img21 from '../assets/f2.png';
 import img11 from '../assets/f1.png';
 import logo from '../assets/Logof.png';
 import logof from '../assets/Logof.png'; 
+import db from '../assets/d-b.jpeg';
+import mb from '../assets/m-b.jpeg';
 import video from '../assets/video.mp4'; 
 import video2 from '../assets/video2.mp4'; // Import video from assets
 import video1 from '../assets/video1.mp4'; // Import video from assets
@@ -370,23 +372,10 @@ const specifications1 = [
 
       {/* Hero Section */}
       <section id="home" ></section>
-      <section  className="hidden md:flex relative h-screen items-center justify-center overflow-hidden">
+      <section  className="hidden md:flex relative h-screen items-center justify-center overflow-hidden" style={{ backgroundImage: `url(${db})` }}>
  {/* Background Video */}
         <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-           muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src={video} type="video/mp4" />
-            {/* Fallback background image if video doesn't load */}
-            <div 
-              className="w-full h-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${banner2})` }}
-            />
-          </video>
+        
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
           <ChevronDown
             className="text-white animate-bounce cursor-pointer"
@@ -396,23 +385,10 @@ const specifications1 = [
         </div>
         </div>
       </section>
-     <section  className="relative h-screen flex items-center justify-center overflow-hidden lg:hidden">
+     <section  className="relative h-screen flex items-center justify-center overflow-hidden lg:hidden" style={{ backgroundImage: `url(${mb})` }}>
  {/* Background Video */}
         <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-           muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src={video1} type="video/mp4" />
-            {/* Fallback background image if video doesn't load */}
-            <div 
-              className="w-full h-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${banner2})` }}
-            />
-          </video>
+        
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
           <ChevronDown
             className="text-white animate-bounce cursor-pointer"
