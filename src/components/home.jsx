@@ -676,7 +676,7 @@ const specifications1 = [
             </button>
             <img 
               src={galleryImages[selectedImage]}
-              alt={`Villa ${selectedImage + 1}`}
+              alt={`Floor Plan ${selectedImage + 1}`}
               className="max-w-full max-h-[80vh] object-contain rounded-lg"
             />
             <div className="flex justify-center mt-4 space-x-2">
@@ -695,6 +695,70 @@ const specifications1 = [
       )}
 
       {/* Specifications Section */}
+      <section  className={` py-10 transition-all duration-1000 ${isVisible.gallery ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+  <h2 className="text-4xl sm:text-5xl font-bold text-[#00274d] mb-6">
+    Floor Plans &
+    <span className="block text-[#6392bf] my-4 ">
+      Layouts
+    </span>
+  </h2>
+  <p className="text-xl text-[#00274d]/80 max-w-3xl mx-auto">
+    Discover the thoughtfully designed spaces and architectural excellence of your future home
+  </p>
+</div>
+
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {galleryImages.map((image, index) => {
+              const floorPlanTitles = [
+                "Ground Floor Plan",
+                "First Floor Plan", 
+                "Master Bedroom Suite",
+                "Living & Dining Area"
+              ];
+              const floorPlanDescriptions = [
+                "Main entrance, living room, dining area, kitchen, guest bedroom, and utility spaces",
+                "Master bedrooms, study room, family lounge, and balcony access",
+                "Spacious master bedroom with walk-in closet and attached bathroom",
+                "Open-concept living and dining area with panoramic lake views"
+              ];
+              
+              return (
+                <div 
+                  key={index}
+                  className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 backdrop-blur-sm bg-white/10"
+                  onClick={() => scrollToSection('contact')}
+                >
+                 <img 
+        src={image}
+        alt={floorPlanTitles[index] || `Floor Plan ${index + 1}`}
+        className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+      />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent backdrop-blur-sm opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-16 left-4 right-4 text-white">
+                      {/* <h3 className="font-bold text-lg mb-1">{floorPlanTitles[index] || `Floor Plan ${index + 1}`}</h3> */}
+                      {/* <p className="text-sm opacity-90">{floorPlanDescriptions[index] || "Detailed floor plan layout"}</p> */}
+                    </div>
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <Eye size={24} />
+                    </div>
+                    <div className="absolute bottom-4 right-4 text-white">
+                      <Maximize size={20} />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+         <div className="text-center mt-12">
+  
+</div>
+
+        </div>
+      </section>
     <section id="specifications" className="py-20 bg-gray-900 text-white relative overflow-hidden flex items-center">
       {/* Animated Background */}
       <div className="absolute inset-0">
