@@ -6,6 +6,10 @@ import img1 from '../assets/Img_1.png';
 import img2 from '../assets/Img_2.png';
 import img3 from '../assets/Img_3.png';
 import img4 from '../assets/Img_4.png';
+import img41 from '../assets/f4.png';
+import img31 from '../assets/f3.png';
+import img21 from '../assets/f2.png';
+import img11 from '../assets/f1.png';
 import logo from '../assets/Logof.png';
 import logof from '../assets/Logof.png'; 
 import video from '../assets/video.mp4'; 
@@ -126,6 +130,7 @@ const specifications1 = [
   const currentSpec = specifications1[selectedSpec];
   // Gallery images (using placeholder images with different scenic themes)
   const galleryImages = [img1, img2, img3, img4];
+  const galleryImages1 = [img11, img21, img31, img41];
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -711,7 +716,7 @@ const specifications1 = [
 
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {galleryImages.map((image, index) => {
+            {galleryImages1.map((image, index) => {
               const floorPlanTitles = [
                 "Ground Floor Plan",
                 "First Floor Plan", 
@@ -1157,7 +1162,7 @@ const specifications1 = [
         type="submit"
         className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-4 rounded-xl font-bold text-lg hover:from-yellow-600 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-500/25"
       >
-        Book My Site Visit Now
+       Download Brochure
       </button>
     </form>
   </div>
