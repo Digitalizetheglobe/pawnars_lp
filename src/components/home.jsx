@@ -52,6 +52,16 @@ const [selectedSpec, setSelectedSpec] = useState(0);
   const [formSuccess, setFormSuccess] = useState(false);
   const [isNumberValid, setIsNumberValid] = useState(true);
   const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isConsentChecked, setIsConsentChecked] = useState(false);
+
+  // Schedule Site Visit form state
+  const [siteVisitForm, setSiteVisitForm] = useState({ name: '', number: '', email: '', message: '' });
+  const [siteVisitSuccess, setSiteVisitSuccess] = useState(false);
+  const [isSiteVisitSubmitting, setIsSiteVisitSubmitting] = useState(false);
+  const [isSiteVisitConsentChecked, setIsSiteVisitConsentChecked] = useState(false);
+  const [isSiteVisitNumberValid, setIsSiteVisitNumberValid] = useState(true);
+  const [isSiteVisitEmailValid, setIsSiteVisitEmailValid] = useState(true);
 
   // Add state and handler for WhatsApp chat popup
   const [showWhatsAppChat, setShowWhatsAppChat] = useState(false);
@@ -63,9 +73,51 @@ const [selectedSpec, setSelectedSpec] = useState(0);
     setIsNumberValid(/^\d{10}$/.test(value));
   };
 
+  const handleSiteVisitNumberChange = (e) => {
+    const value = e.target.value.replace(/\D/g, '');
+    setSiteVisitForm(f => ({ ...f, number: value }));
+    setIsSiteVisitNumberValid(/^\d{10}$/.test(value));
+  };
+
+  // API submission function
+  const submitFormToAPI = async (formData) => {
+    try {
+      const response = await fetch('https://api.risingspaces.in/api/forms/forms/691adc9bc476888712e4c404/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          data: {
+            name: formData.name,
+            number: formData.number,
+            email: formData.email,
+            message: formData.message
+          }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
+      const result = await response.json();
+      return { success: true, data: result };
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      return { success: false, error: error.message };
+    }
+  };
+
   useEffect(() => {
-    setIsEmailValid(form.email === '' || form.email.includes('gmail.com'));
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setIsEmailValid(form.email === '' || emailRegex.test(form.email));
   }, [form.email]);
+
+  useEffect(() => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setIsSiteVisitEmailValid(siteVisitForm.email === '' || emailRegex.test(siteVisitForm.email));
+  }, [siteVisitForm.email]);
 
   useEffect(() => {
     setIsVisible(true);
@@ -240,15 +292,25 @@ const specifications1 = [
             ) : (
               <form
                 className="space-y-6"
-                onSubmit={e => {
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  if (!isNumberValid || !isEmailValid) return;
-                  setFormSuccess(true);
-                  setTimeout(() => {
-                    setIsModalOpen(false);
-                    setFormSuccess(false);
-                    setForm({ name: '', number: '', email: '', message: '' });
-                  }, 1800);
+                  if (!isNumberValid || !isEmailValid || !isConsentChecked) return;
+                  
+                  setIsSubmitting(true);
+                  const result = await submitFormToAPI(form);
+                  setIsSubmitting(false);
+                  
+                  if (result.success) {
+                    setFormSuccess(true);
+                    setTimeout(() => {
+                      setIsModalOpen(false);
+                      setFormSuccess(false);
+                      setForm({ name: '', number: '', email: '', message: '' });
+                      setIsConsentChecked(false);
+                    }, 1800);
+                  } else {
+                    alert('Failed to submit form. Please try again.');
+                  }
                 }}
               >
                 <h3 className="text-2xl font-bold mb-4 text-[#00274d]">Enquire Now</h3>
@@ -287,7 +349,7 @@ const specifications1 = [
                     required
                   />
                   {!isEmailValid && form.email.length > 0 && (
-                    <p className="text-red-500 text-xs mt-1">Email must contain \"gmail.com\".</p>
+                    <p className="text-red-500 text-xs mt-1">Please enter a valid email address.</p>
                   )}
                 </div>
                 <div>
@@ -300,12 +362,43 @@ const specifications1 = [
                     required
                   />
                 </div>
+                <div className="flex items-start">
+                  <input
+                    type="checkbox"
+                    id="consent-checkbox"
+                    checked={isConsentChecked}
+                    onChange={e => setIsConsentChecked(e.target.checked)}
+                    className="mt-1 mr-2 w-4 h-4 text-[#00274d] border-gray-300 rounded focus:ring-2 focus:ring-green-400"
+                    required
+                  />
+                  <label htmlFor="consent-checkbox" className="text-sm text-gray-700">
+                    Yes, I consent to the{' '}
+                    <a 
+                      href="https://risingspaces.in/privacy-policy" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-[#00274d] hover:text-[#00444d] underline"
+                    >
+                      Privacy Policy
+                    </a>
+                    {' '}and{' '}
+                    <a 
+                      href="https://risingspaces.in/terms-conditions" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-[#00274d] hover:text-[#00444d] underline"
+                    >
+                      Terms and Conditions
+                    </a>
+                    .
+                  </label>
+                </div>
                 <button
                   type="submit"
-                  className="w-full bg-[#00274d] hover:bg-[#00444d] text-white font-bold py-3 rounded-lg transition-all"
-                  disabled={!isNumberValid || !isEmailValid}
+                  className="w-full bg-[#00274d] hover:bg-[#00444d] text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={!isNumberValid || !isEmailValid || !isConsentChecked || isSubmitting}
                 >
-                  Submit
+                  {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
               </form>
             )}
@@ -1095,52 +1188,137 @@ const specifications1 = [
   {/* Right Column - Form */}
   <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl text-white">
     <h3 className="text-2xl font-bold mb-6">Schedule Site Visit</h3>
-    <form className="space-y-6">
-      
-      {/* Name */}
-      <input
-        type="text"
-        placeholder="Your Full Name"
-        className="w-full p-4 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-      />
-
-      {/* Phone */}
-      <input
-        type="tel"
-        placeholder="Phone Number"
-        className="w-full p-4 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-      />
-
-      {/* Email */}
-      <input
-        type="email"
-        placeholder="Email Address"
-        className="w-full p-4 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-      />
-
-      {/* Preferred Time */}
-      <select className="w-full p-4 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
-        <option className="text-black" value="">Preferred Visit Time</option>
-        <option className="text-black" value="morning">Morning (9 AM - 12 PM)</option>
-        <option className="text-black" value="afternoon">Afternoon (12 PM - 4 PM)</option>
-        <option className="text-black" value="evening">Evening (4 PM - 7 PM)</option>
-      </select>
-
-      {/* Notes */}
-      <textarea
-        placeholder="Any specific requirements or questions?"
-        rows="4"
-        className="w-full p-4 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 resize-none"
-      ></textarea>
-
-      {/* Submit Button */}
-      <button
-        type="submit"
-        className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-4 rounded-xl font-bold text-lg hover:from-yellow-600 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-500/25"
+    {siteVisitSuccess ? (
+      <div className="flex flex-col items-center justify-center py-12">
+        <CheckCircle className="w-16 h-16 text-yellow-400 mb-4" />
+        <h3 className="text-2xl font-bold mb-2 text-white">Visit Scheduled!</h3>
+        <p className="text-gray-200 text-center">Thank you for your interest. We'll get in touch soon.</p>
+        <button
+          onClick={() => {
+            setSiteVisitSuccess(false);
+            setSiteVisitForm({ name: '', number: '', email: '', message: '' });
+            setIsSiteVisitConsentChecked(false);
+            setIsSiteVisitNumberValid(true);
+            setIsSiteVisitEmailValid(true);
+          }}
+          className="mt-4 bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-lg transition-all"
+        >
+          Submit Another
+        </button>
+      </div>
+    ) : (
+      <form 
+        className="space-y-6"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          if (!isSiteVisitNumberValid || !isSiteVisitEmailValid || !isSiteVisitConsentChecked) return;
+          
+          setIsSiteVisitSubmitting(true);
+          const result = await submitFormToAPI(siteVisitForm);
+          setIsSiteVisitSubmitting(false);
+          
+          if (result.success) {
+            setSiteVisitSuccess(true);
+          } else {
+            alert('Failed to submit form. Please try again.');
+          }
+        }}
       >
-       Download Brochure
-      </button>
-    </form>
+        {/* Name */}
+        <input
+          type="text"
+          placeholder="Your Full Name"
+          className="w-full p-4 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+          value={siteVisitForm.name}
+          onChange={e => setSiteVisitForm(f => ({ ...f, name: e.target.value }))}
+          required
+        />
+
+        {/* Phone */}
+        <div>
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            maxLength={10}
+            pattern="\d{10}"
+            className={`w-full p-4 bg-white/20 backdrop-blur-md border ${isSiteVisitNumberValid || siteVisitForm.number.length === 0 ? 'border-white/30' : 'border-red-500'} rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300`}
+            value={siteVisitForm.number}
+            onChange={handleSiteVisitNumberChange}
+            required
+          />
+          {!isSiteVisitNumberValid && siteVisitForm.number.length > 0 && (
+            <p className="text-red-400 text-xs mt-1">Please enter a valid 10-digit number.</p>
+          )}
+        </div>
+
+        {/* Email */}
+        <div>
+          <input
+            type="email"
+            placeholder="Email Address"
+            className={`w-full p-4 bg-white/20 backdrop-blur-md border ${isSiteVisitEmailValid || siteVisitForm.email.length === 0 ? 'border-white/30' : 'border-red-500'} rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300`}
+            value={siteVisitForm.email}
+            onChange={e => setSiteVisitForm(f => ({ ...f, email: e.target.value }))}
+            required
+          />
+          {!isSiteVisitEmailValid && siteVisitForm.email.length > 0 && (
+            <p className="text-red-400 text-xs mt-1">Please enter a valid email address.</p>
+          )}
+        </div>
+
+        {/* Notes */}
+        <textarea
+          placeholder="Any specific requirements or questions?"
+          rows="4"
+          className="w-full p-4 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 resize-none"
+          value={siteVisitForm.message}
+          onChange={e => setSiteVisitForm(f => ({ ...f, message: e.target.value }))}
+          required
+        ></textarea>
+
+        {/* Consent Checkbox */}
+        <div className="flex items-start">
+          <input
+            type="checkbox"
+            id="site-visit-consent-checkbox"
+            checked={isSiteVisitConsentChecked}
+            onChange={e => setIsSiteVisitConsentChecked(e.target.checked)}
+            className="mt-1 mr-2 w-4 h-4 text-yellow-500 border-white/30 rounded focus:ring-2 focus:ring-blue-500 bg-white/20"
+            required
+          />
+          <label htmlFor="site-visit-consent-checkbox" className="text-sm text-white">
+            Yes, I consent to the{' '}
+            <a 
+              href="https://risingspaces.in/privacy-policy" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-yellow-400 hover:text-yellow-300 underline"
+            >
+              Privacy Policy
+            </a>
+            {' '}and{' '}
+            <a 
+              href="https://risingspaces.in/terms-conditions" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-yellow-400 hover:text-yellow-300 underline"
+            >
+              Terms and Conditions
+            </a>
+            .
+          </label>
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-4 rounded-xl font-bold text-lg hover:from-yellow-600 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          disabled={!isSiteVisitNumberValid || !isSiteVisitEmailValid || !isSiteVisitConsentChecked || isSiteVisitSubmitting}
+        >
+          {isSiteVisitSubmitting ? 'Submitting...' : 'Submit'}
+        </button>
+      </form>
+    )}
   </div>
 </div>
 
