@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, Home, Car, TreePine, Waves, Star, ChevronDown, Menu, X, Eye, Maximize, Camera, Zap, Shield, Wifi, ShieldCheck, Square, Trees, Smartphone, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Phone, Mail, MapPin, Home, Car, TreePine, Waves, Star, ChevronDown, ChevronUp, Menu, X, Eye, Maximize, Camera, Zap, Shield, Wifi, ShieldCheck, Square, Trees, Smartphone, CheckCircle } from 'lucide-react';
 import banner2 from '../assets/banner.png'; // Ensure this path is correct
 import dam from '../assets/Img_4.png'; // Corrected case
 import img1 from '../assets/Img_1.png';
@@ -66,6 +67,10 @@ const [selectedSpec, setSelectedSpec] = useState(0);
   // Add state and handler for WhatsApp chat popup
   const [showWhatsAppChat, setShowWhatsAppChat] = useState(false);
   const [whatsAppMessage, setWhatsAppMessage] = useState('');
+  
+  // Scroll position state
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showScrollBottom, setShowScrollBottom] = useState(false);
 
   const handleNumberChange = (e) => {
     const value = e.target.value.replace(/\D/g, '');
@@ -125,6 +130,26 @@ const [selectedSpec, setSelectedSpec] = useState(0);
       setSelectedSpec(prev => (prev + 1) % specifications1.length);
     }, 2000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Scroll position tracking
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Show scroll to top button when scrolled down more than 300px
+      setShowScrollTop(scrollTop > 300);
+      
+      // Show scroll to bottom button when not near bottom (within 100px of bottom)
+      setShowScrollBottom(scrollTop + windowHeight < documentHeight - 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
+    
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
 const specifications1 = [
@@ -213,6 +238,14 @@ const specifications1 = [
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToBottom = () => {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
   };
 
  const amenities = [
@@ -373,23 +406,12 @@ const specifications1 = [
                   />
                   <label htmlFor="consent-checkbox" className="text-sm text-gray-700">
                     Yes, I consent to the{' '}
-                    <a 
-                      href="https://risingspaces.in/privacy-policy" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
+                    <Link 
+                      to="/privacy-policy" 
                       className="text-[#00274d] hover:text-[#00444d] underline"
                     >
                       Privacy Policy
-                    </a>
-                    {' '}and{' '}
-                    <a 
-                      href="https://risingspaces.in/terms-conditions" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-[#00274d] hover:text-[#00444d] underline"
-                    >
-                      Terms and Conditions
-                    </a>
+                    </Link>
                     .
                   </label>
                 </div>
@@ -1288,23 +1310,12 @@ const specifications1 = [
           />
           <label htmlFor="site-visit-consent-checkbox" className="text-sm text-white">
             Yes, I consent to the{' '}
-            <a 
-              href="https://risingspaces.in/privacy-policy" 
-              target="_blank" 
-              rel="noopener noreferrer"
+            <Link 
+              to="/privacy-policy" 
               className="text-yellow-400 hover:text-yellow-300 underline"
             >
               Privacy Policy
-            </a>
-            {' '}and{' '}
-            <a 
-              href="https://risingspaces.in/terms-conditions" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-yellow-400 hover:text-yellow-300 underline"
-            >
-              Terms and Conditions
-            </a>
+            </Link>
             .
           </label>
         </div>
@@ -1394,6 +1405,12 @@ const specifications1 = [
             {link}
           </button>
               ))}
+              <Link
+                to="/privacy-policy"
+                className="block text-gray-200 hover:text-white transition-colors duration-300"
+              >
+                Privacy Policy
+              </Link>
             </div>
           </div>
           
@@ -1426,7 +1443,13 @@ const specifications1 = [
                     >
                         Digitalize The Globe
                     </a>.</p>
-          <div className="mt-4 flex justify-center space-x-6">
+          <div className="mt-4 flex justify-center items-center space-x-4 flex-wrap gap-2">
+            <Link
+              to="/privacy-policy"
+              className="text-sm text-gray-300 hover:text-white transition-colors duration-300 underline"
+            >
+              Privacy Policy
+            </Link>
             <span className="text-sm">🏆 Premium Real Estate</span>
             <span className="text-sm">🌟 Luxury Living</span>
             <span className="text-sm">🔒 Secure Investment</span>
@@ -1436,16 +1459,39 @@ const specifications1 = [
           
         </footer>
 
-        {/* Floating Call Button */}
-   <div className="fixed bottom-6 right-6 z-50">
-  <a
-    href="tel:8378966777"
-    className="flex items-center justify-center bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white w-14 h-14 rounded-full shadow-lg hover:shadow-[#0a4384]/40 transform hover:scale-110 transition duration-300 animate-pulse"
-    aria-label="Call Now"
-  >
-    <Phone size={24} />
-  </a>
-</div>
+        {/* Scroll Buttons and Call Button Container */}
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+          {/* Scroll to Top Button */}
+          {showScrollTop && (
+            <button
+              onClick={scrollToTop}
+              className="flex items-center justify-center bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white w-12 h-12 rounded-full shadow-lg hover:shadow-[#0a4384]/40 transform hover:scale-110 transition duration-300"
+              aria-label="Scroll to Top"
+            >
+              <ChevronUp size={24} />
+            </button>
+          )}
+          
+          {/* Scroll to Bottom Button */}
+          {showScrollBottom && (
+            <button
+              onClick={scrollToBottom}
+              className="flex items-center justify-center bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white w-12 h-12 rounded-full shadow-lg hover:shadow-[#0a4384]/40 transform hover:scale-110 transition duration-300"
+              aria-label="Scroll to Bottom"
+            >
+              <ChevronDown size={24} />
+            </button>
+          )}
+          
+          {/* Floating Call Button */}
+          <a
+            href="tel:8378966777"
+            className="flex items-center justify-center bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white w-14 h-14 rounded-full shadow-lg hover:shadow-[#0a4384]/40 transform hover:scale-110 transition duration-300 animate-pulse"
+            aria-label="Call Now"
+          >
+            <Phone size={24} />
+          </a>
+        </div>
 
       {/* Floating WhatsApp Button and Popup */}
       <button
