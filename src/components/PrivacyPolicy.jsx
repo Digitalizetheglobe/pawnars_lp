@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Shield, Lock, Eye, FileText, Users, Database, Globe } from 'lucide-react';
 import logo from '../assets/Logof.png';
 
 const PrivacyPolicy = () => {
+  useEffect(() => {
+    // Update or add robots meta tag with noindex, nofollow
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    
+    // Store original content before updating
+    const originalContent = robotsMeta ? robotsMeta.getAttribute('content') || 'index, follow' : 'index, follow';
+    
+    if (robotsMeta) {
+      // Update existing robots meta tag
+      robotsMeta.content = 'noindex, nofollow';
+    } else {
+      // Create new robots meta tag if it doesn't exist
+      robotsMeta = document.createElement('meta');
+      robotsMeta.name = 'robots';
+      robotsMeta.content = 'noindex, nofollow';
+      document.head.appendChild(robotsMeta);
+    }
+
+    // Cleanup function to restore original robots meta tag when component unmounts
+    return () => {
+      const existingRobots = document.querySelector('meta[name="robots"]');
+      if (existingRobots) {
+        existingRobots.content = originalContent;
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       {/* Header */}
