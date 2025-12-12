@@ -12,8 +12,8 @@
   "dependencies": {
     "framer-motion": "^12.19.1",
     "lucide-react": "^0.517.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
     "react-router-dom": "^7.6.2"
   },
   "devDependencies": {
