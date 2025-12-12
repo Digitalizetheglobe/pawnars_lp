@@ -87,14 +87,14 @@ const [selectedSpec, setSelectedSpec] = useState(0);
   // API submission function
   const submitFormToAPI = async (formData) => {
     try {
-      const response = await fetch('https://api.risingspaces.in/api/forms/forms/691adc9bc476888712e4c404/submit', {
+      const response = await fetch('https://api.risingspaces.in/api/forms/forms/693925400576098ae193fddf/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           data: {
-            name: formData.name,
+            full_name: formData.name,
             number: formData.number,
             email: formData.email,
             message: formData.message
@@ -407,7 +407,7 @@ const specifications1 = [
                   <label htmlFor="consent-checkbox" className="text-sm text-gray-700">
                     Yes, I consent to the{' '}
                     <Link 
-                      to="/privacy-policy" 
+                      to="https://risingspaces.in/privacy-policy" 
                       className="text-[#00274d] hover:text-[#00444d] underline"
                     >
                       Privacy Policy
@@ -1311,7 +1311,7 @@ const specifications1 = [
           <label htmlFor="site-visit-consent-checkbox" className="text-sm text-white">
             Yes, I consent to the{' '}
             <Link 
-              to="/privacy-policy" 
+              to="https://risingspaces.in/privacy-policy" 
               className="text-yellow-400 hover:text-yellow-300 underline"
             >
               Privacy Policy
@@ -1406,7 +1406,7 @@ const specifications1 = [
           </button>
               ))}
               <Link
-                to="/privacy-policy"
+                to="https://risingspaces.in/privacy-policy"
                 className="block text-gray-200 hover:text-white transition-colors duration-300"
               >
                 Privacy Policy
@@ -1445,7 +1445,7 @@ const specifications1 = [
                     </a>.</p>
           <div className="mt-4 flex justify-center items-center space-x-4 flex-wrap gap-2">
             <Link
-              to="/privacy-policy"
+              to="https://risingspaces.in/privacy-policy"
               className="text-sm text-gray-300 hover:text-white transition-colors duration-300 underline"
             >
               Privacy Policy
