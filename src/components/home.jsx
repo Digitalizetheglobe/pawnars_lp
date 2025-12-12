@@ -1368,12 +1368,7 @@ const specifications1 = [
   </a>
 
   {/* WhatsApp Inquiry Button */}
-  <button 
-    onClick={() => setShowWhatsAppChat(!showWhatsAppChat)}
-    className="bg-gradient-to-r from-green-600 to-green-500 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-green-500/25 transform hover:scale-105 transition-all duration-300"
-  >
-    WhatsApp Inquiry
-  </button>
+ 
 </div>
 
             </div>
