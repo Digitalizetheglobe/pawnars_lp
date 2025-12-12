@@ -13,8 +13,9 @@ import img21 from '../assets/f2.png';
 import img11 from '../assets/f1.png';
 import logo from '../assets/Logof.png';
 import logof from '../assets/Logof.png'; 
-import db from '../assets/d-b.jpeg';
-import mb from '../assets/m-b.jpeg';
+import db from '../assets/db.jpg';
+import mb from '../assets/mb.jpg';
+import tb from '../assets/tb.jpg';
 import video from '../assets/video.mp4'; 
 import video2 from '../assets/video2.mp4'; // Import video from assets
 import video1 from '../assets/video1.mp4'; // Import video from assets
@@ -487,7 +488,8 @@ const specifications1 = [
 
       {/* Hero Section */}
       <section id="home" ></section>
-      <section  className="hidden md:flex relative h-screen items-center justify-center overflow-hidden" style={{ backgroundImage: `url(${db})` }}>
+      {/* Desktop Banner - shows on lg and up */}
+      <section  className="hidden lg:flex relative w-full min-h-screen top-20 left-0 m-0 p-0 items-center justify-center overflow-hidden" style={{ backgroundImage: `url(${db})`, backgroundSize: 'cover', backgroundPosition: 'top center', backgroundRepeat: 'no-repeat', minHeight: '100vh', marginTop: 0, paddingTop: 0 }}>
  {/* Background Video */}
         <div className="absolute inset-0 z-0">
         
@@ -500,7 +502,8 @@ const specifications1 = [
         </div>
         </div>
       </section>
-     <section  className="relative h-screen flex items-center justify-center overflow-hidden lg:hidden" style={{ backgroundImage: `url(${mb})` }}>
+      {/* Tablet Banner - shows on md to lg (tablet only) */}
+      <section  className="hidden md:flex lg:hidden relative w-full min-h-screen top-0 left-0 m-0 p-0 items-center justify-center overflow-hidden" style={{ backgroundImage: `url(${tb})`, backgroundSize: '100% 100%', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', minHeight: '100vh', marginTop: 0, paddingTop: 0, height: '100vh', width: '100%' }}>
  {/* Background Video */}
         <div className="absolute inset-0 z-0">
         
@@ -513,6 +516,21 @@ const specifications1 = [
         </div>
         </div>
       </section>
+      {/* Mobile Banner - shows only on mobile */}
+     <section  className="relative w-full min-h-screen top-0 left-0 m-0 p-0 flex items-center justify-center overflow-hidden md:hidden" style={{ backgroundImage: `url(${mb})`, backgroundSize: '100% 100%', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', minHeight: '100vh', marginTop: 0, paddingTop: 0, height: '100vh', width: '100%' }}>
+ {/* Background Video */}
+        <div className="absolute inset-0 z-0">
+        
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+          <ChevronDown
+            className="text-white animate-bounce cursor-pointer"
+            size={32}
+            onClick={() => scrollToSection('footer')}
+          />
+        </div>
+        </div>
+      </section>
+
 
 
       {/* About Section */}
@@ -1418,7 +1436,7 @@ const specifications1 = [
         <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
         <div className="space-y-3 text-gray-200">
           <a href="tel:8378966777" className="block cursor-pointer">📞 83 789 66 777</a>
-          <a href="mailto:info@pawnalakevillas.com" className="block cursor-pointer">📧 info@pawnalakevillas.com</a>
+          <a href="mailto:info@thepawnavillas.com" className="block cursor-pointer">📧 info@thepawnavillas.com</a>
           <a 
         href="https://maps.app.goo.gl/Zon92PNN4EpR4zvR8" 
         target="_blank" 
