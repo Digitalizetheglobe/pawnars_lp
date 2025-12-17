@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src//assets/android-chrome-192x192.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5 BHK Waterfront Villa At Pawna Lake | Price starting at 2.75 Cr</title>
+    <title>Pawna Lake Villa | 5 BHK Waterfront Villa At Pawna Lake | Price starting at 2.75 Cr</title>
     <meta name="description" content="Book exclusive luxury villas near Pawna Lake for a peaceful lakeside escape. Enjoy private pools, scenic views, and premium amenities—perfect for weekend getaways.">
     <meta name="keywords" content="Luxury Villas Pawna Lake, Villas near Pawna Lake, Private Pool Villas Pawna, Premium Villas Lonavala, Scenic View Villas Pawna, Exclusive Villas near Pune, Book Villa Pawna Lake, Pawna Lake Rentals, The Pawna Villas, Pawna Lake Villas, Waterfront Villas Pawna, Luxury Villas Lonavala, Villa Booking Pawna Lake, Premium Villas Pune, Private Villas Pawna Lake">
     <meta name="google-site-verification" content="VL5IZkCEv0uajtTISqHrUkHpY_DHI-0arUy7s3yME5M" />
@@ -45,6 +45,32 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-PHMX7B1R0F');
+    </script>
+
+    <!-- Google tag (gtag.js) conversion event helper -->
+    <script>
+      // Helper function to delay opening a URL until a gtag event is sent.
+      // Call this in response to an action that should navigate to a URL.
+      function gtagSendEvent(url) {
+        var callback = function () {
+          if (typeof url === 'string') {
+            window.location = url;
+          }
+        };
+
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion_event_contact', {
+            'event_callback': callback,
+            'event_timeout': 2000
+            // TODO: add your event parameters here, e.g. 'value', 'currency', etc.
+          });
+        } else {
+          // Fallback: if gtag is not ready, just navigate immediately
+          callback();
+        }
+
+        return false;
+      }
     </script>
   </head>
   <body>
