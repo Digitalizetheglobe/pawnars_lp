@@ -1472,8 +1472,29 @@ const specifications1 = [
           
         </footer>
 
-        {/* Scroll Buttons and Call Button Container */}
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+        {/* Mobile Sticky Call / Enquire Bar (only on mobile) */}
+        <div className="fixed bottom-0 left-0 right-0 z-[60] md:hidden">
+          <div className="max-w-7xl mx-auto px-4 pb-4">
+            <div className="flex">
+              <a
+                href="tel:+918805390707"
+                className="flex-1 bg-[#138A36] text-white font-semibold py-4 text-center text-base"
+              >
+                Call Now
+              </a>
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+                className="flex-1 bg-[#F6A800] text-white font-semibold py-4 text-center text-base"
+              >
+                Enquire Now
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Scroll Buttons and Call Button Container (tablet & desktop only) */}
+        <div className="fixed bottom-6 right-6 z-50 flex-col gap-3 items-end hidden md:flex">
           {/* Scroll to Top Button */}
           {showScrollTop && (
             <button
