@@ -237,7 +237,15 @@ const specifications1 = [
   }, []);
 
   const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      // Update URL hash so the link is shareable and reflects current section
+      if (typeof window !== 'undefined' && window.history && window.location) {
+        const basePath = window.location.pathname.split('#')[0];
+        window.history.replaceState(null, '', `${basePath}#${sectionId}`);
+      }
+    }
     setIsMenuOpen(false);
   };
 
