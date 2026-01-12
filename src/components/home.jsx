@@ -305,7 +305,7 @@ const specifications1 = [
 
   const handleWhatsAppSend = () => {
     if (whatsAppMessage.trim()) {
-      const url = `https://wa.me/918378966777?text=${encodeURIComponent(whatsAppMessage)}`;
+      const url = `https://wa.me/917410008984?text=${encodeURIComponent(whatsAppMessage)}`;
       window.open(url, '_blank');
       setShowWhatsAppChat(false);
       setWhatsAppMessage('');
@@ -1175,7 +1175,7 @@ const specifications1 = [
         
         {/* Phone */}
         <a
-          href="tel:8378966777"
+          href="tel:7410008984"
           className="flex items-center text-lg hover:text-yellow-400 transition-colors duration-300"
         >
           <Phone className="mr-4 bg-blue-500 p-2 rounded-full text-white" size={40} />
@@ -1369,7 +1369,7 @@ const specifications1 = [
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
   {/* Call Now Button */}
   <a 
-    href="tel:8378966777"
+    href="tel:7410008984"
     className="bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-[#0a4384]/30 transform hover:scale-105 transition-all duration-300"
   >
     Call Now - 83 789 66 777
@@ -1438,7 +1438,7 @@ const specifications1 = [
              <div>
         <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
         <div className="space-y-3 text-gray-200">
-          <a href="tel:8378966777" className="block cursor-pointer">📞 83 789 66 777</a>
+          <a href="tel:7410008984" className="block cursor-pointer">📞 83 789 66 777</a>
           <a href="mailto:info@thepawnavillas.com" className="block cursor-pointer">📧 info@thepawnavillas.com</a>
           <a 
         href="https://maps.app.goo.gl/Zon92PNN4EpR4zvR8" 
@@ -1527,7 +1527,7 @@ const specifications1 = [
           
           {/* Floating Call Button */}
           <a
-            href="tel:8378966777"
+            href="tel:7410008984"
             className="flex items-center justify-center bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white w-14 h-14 rounded-full shadow-lg hover:shadow-[#0a4384]/40 transform hover:scale-110 transition duration-300 animate-pulse"
             aria-label="Call Now"
           >
