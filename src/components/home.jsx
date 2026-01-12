@@ -1181,7 +1181,7 @@ const specifications1 = [
           <Phone className="mr-4 bg-blue-500 p-2 rounded-full text-white" size={40} />
           <div>
             <div className="font-semibold">Call Now</div>
-            <div className="text-gray-300">83 789 66 777</div>
+            <div className="text-gray-300">74 100 08 984</div>
           </div>
         </a>
 
@@ -1372,7 +1372,7 @@ const specifications1 = [
     href="tel:7410008984"
     className="bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-[#0a4384]/30 transform hover:scale-105 transition-all duration-300"
   >
-    Call Now - 83 789 66 777
+    Call Now - 74 100 08 984
   </a>
 
   {/* WhatsApp Inquiry Button */}
@@ -1438,7 +1438,7 @@ const specifications1 = [
              <div>
         <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
         <div className="space-y-3 text-gray-200">
-          <a href="tel:7410008984" className="block cursor-pointer">📞 83 789 66 777</a>
+          <a href="tel:7410008984" className="block cursor-pointer">📞 74 100 08 984</a>
           <a href="mailto:info@thepawnavillas.com" className="block cursor-pointer">📧 info@thepawnavillas.com</a>
           <a 
         href="https://maps.app.goo.gl/Zon92PNN4EpR4zvR8" 
