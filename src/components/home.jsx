@@ -1455,15 +1455,8 @@ const specifications1 = [
             </div>
             
             <div className="border-t border-gray-800 pt-8 mt-8 text-center text-gray-200">
-          <p>&copy; 2025 Pawna Lake Villas. All rights reserved.  | Crafted with care by 
-                    <a 
-                        href="https://digitalizetheglobe.com/" 
-                        className="text-[#d84a48] hover:text-white transition ml-1"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Digitalize The Globe
-                    </a>.</p>
+          <p>&copy; 2025 Pawna Lake Villas. All rights reserved.  
+                   </p>
           <div className="mt-4 flex justify-center items-center space-x-4 flex-wrap gap-2">
             <Link
               to="https://risingspaces.in/privacy-policy"
