@@ -11,7 +11,7 @@ import img41 from '../assets/f4.png';
 import img31 from '../assets/f3.png';
 import img21 from '../assets/f2.png';
 import img11 from '../assets/f1.png';
-import logo from '../assets/logo_1.png';
+import logo from '../assets/Logo_1.png';
 import logof from '../assets/Logo_1.png'; 
 import db from '../assets/db.jpg';
 import mb from '../assets/mb.jpg';
