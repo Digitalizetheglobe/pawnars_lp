@@ -13,9 +13,9 @@ import img21 from '../assets/f2.png';
 import img11 from '../assets/f1.png';
 import logo from '../assets/Logo_1.png';
 import logof from '../assets/Logo_1.png';
-import db from '../assets/Pawna_New.jpg';
-import mb from '../assets/mb.jpg';
-import tb from '../assets/pawana_new_tab.jpg';
+import db from '../assets/Pawna_New.webp';
+import mb from '../assets/pawana_new_mobile.webp';
+import tb from '../assets/pawana_new_tab.webp';
 import video from '../assets/video.mp4';
 import video2 from '../assets/video2.mp4'; // Import video from assets
 import video1 from '../assets/video1.mp4'; // Import video from assets
@@ -526,7 +526,7 @@ const PawnaLakeVillas = () => {
       </section>
       {/* Mobile Banner - shows only on mobile */}
       <section className="relative w-full mt-16 md:mt-20 flex items-center justify-center overflow-hidden md:hidden">
-        <img src={db} alt="Mobile Banner" className="w-full h-auto object-contain" />
+        <img src={mb} alt="Mobile Banner" className="w-full h-auto object-contain" />
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-auto">
             <ChevronDown
