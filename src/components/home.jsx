@@ -88,18 +88,16 @@ const PawnaLakeVillas = () => {
   // API submission function
   const submitFormToAPI = async (formData) => {
     try {
-      const response = await fetch('https://api.risingspaces.in/api/forms/forms/6a158501fbaedc3f5f68b738/submit', {
+      const response = await fetch('https://api.risingspaces.in/api/forms/forms/6a47f2671c3b4bf350d41d9a/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           data: {
-            full_name: formData.name.trim(),
-            mobile_number: formData.number.trim(),
-            email_address: formData.email.trim().toLowerCase(),
-            property_type: '',
-            location: '',
+            name: formData.name.trim(),
+            email: formData.email.trim().toLowerCase(),
+            phone_number: Number(formData.number.trim()),
             message: formData.message?.trim() || ''
           }
         })
