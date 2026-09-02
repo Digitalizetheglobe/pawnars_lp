@@ -23,6 +23,7 @@ import video1 from '../assets/video1.mp4'; // Import video from assets
 import frame from '../assets/Frame.png'; // Corrected case
 import frame1 from '../assets/Frame1.png'; // Corrected case
 import { motion } from 'framer-motion';
+import LandingBanner from './LandingBanner.jsx';
 
 
 const containerVariants = {
@@ -495,45 +496,14 @@ const PawnaLakeVillas = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" ></section>
-      {/* Desktop Banner - shows on lg and up */}
-      <section className="hidden lg:flex relative w-full mt-20 items-center justify-center overflow-hidden">
-        <img src={db} alt="Desktop Banner" className="w-full h-auto object-contain" />
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-auto">
-            <ChevronDown
-              className="text-white animate-bounce cursor-pointer"
-              size={32}
-              onClick={() => scrollToSection('footer')}
-            />
-          </div>
-        </div>
-      </section>
-      {/* Tablet Banner - shows on md to lg (tablet only) */}
-      <section className="hidden md:flex lg:hidden relative w-full mt-20 items-center justify-center overflow-hidden">
-        <img src={tb} alt="Tablet Banner" className="w-full h-auto object-contain" />
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-auto">
-            <ChevronDown
-              className="text-white animate-bounce cursor-pointer"
-              size={32}
-              onClick={() => scrollToSection('footer')}
-            />
-          </div>
-        </div>
-      </section>
-      {/* Mobile Banner - shows only on mobile */}
-      <section className="relative w-full mt-16 md:mt-20 flex items-center justify-center overflow-hidden md:hidden">
-        <img src={mb} alt="Mobile Banner" className="w-full h-auto object-contain" />
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-auto">
-            <ChevronDown
-              className="text-white animate-bounce cursor-pointer"
-              size={32}
-              onClick={() => scrollToSection('footer')}
-            />
-          </div>
-        </div>
+      <section id="home" className="w-full mt-16 md:mt-20">
+        <LandingBanner
+          bannerId="6a97d3ef21a331a8f5bded2a"
+          fallbackDesktop={db}
+          fallbackTablet={tb}
+          fallbackMobile={mb}
+          onScrollClick={() => scrollToSection('footer')}
+        />
       </section>
 
 
